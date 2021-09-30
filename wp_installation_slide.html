@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        #busAnimate {
+            margin-top: 25vh;
+            width: 200px;
+            height: auto;
+            transform: translateX(-200px);
+            z-index: 300;
+            position: fixed;
+        }
+
+        .busAnimater {
+            animation: busAnimate 5s linear;
+        }
+
+        .animatedBus {
+            width: 100%;
+            height: 100%;
+            animation: busVibrate 1.5s linear infinite;
+        }
+
+        .back_wheel {
+            width: 25%;
+            top: -54px;
+            position: relative;
+            left: 16px;
+            animation: wheel 1.5s linear infinite;
+        }
+
+        .front_wheel {
+            width: 25%;
+            position: relative;
+            top: -55px;
+            left: 62px;
+            animation: wheel 1.5s linear infinite;
+        }
+
+        @keyframes busVibrate {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(5px);
+            }
+        }
+
+
+        @keyframes wheel {
+            0% {
+                transform: rotate(0deg) translateY(0px);
+            }
+
+            50% {
+                transform: rotate(180deg) translateY(5px);
+            }
+
+            100% {
+                transform: rotate(360deg) translateY(-5px);
+            }
+        }
+
+        @keyframes busAnimate {
+            0% {
+                transform: translateX(-200px);
+            }
+
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+
+
+        #click_animate {
+            padding: 5px 15px;
+            border-radius: 50px;
+            background-color: teal;
+            color: white;
+            font-size: 18px;
+            border: none;
+            margin: 10px;
+        }
+    </style>
+    <title>Animate</title>
+</head>
+
+<body>
+
+
+    <center>
+        <button id="click_animate" onclick="animateBus('')"> Animate On/Off</button>
+        <button id="click_animate" onclick="animateBus('https:www.youtube.com')"> Youtube On/Off</button>
+        <button id="click_animate" onclick="animateBus('https:www.ahkemad.xyz')"> AHK On/Off</button>
+    </center>
+
+
+    <div id="busAnimate">
+        <img src="images/buss.png" alt="" class="animatedBus">
+        <img src="images/back_wheel.png" alt="" class="back_wheel">
+        <img src="images/back_wheel.png" alt="" class="front_wheel">
+
+    </div>
+
+
+
+
+
+    <!-- bus sound audio  -->
+    <audio id="myAudio">
+        <source src="bus_sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+
+        function animateBus(event) {
+
+
+
+            var audio = document.getElementById("myAudio");
+            audio.play();
+
+            function animateBusFunc() {
+                document.getElementById("busAnimate").classList.remove("busAnimater");
+                document.body.style.overflowY = "auto";
+            }
+
+
+
+
+            if (event !== "") {
+
+                document.body.style.overflowY = "hidden";
+                document.getElementById("busAnimate").classList.add("busAnimater");
+                setInterval(function () {
+                    window.location.href = event;
+                }, 5000);
+
+            }
+
+            else {
+
+                document.body.style.overflowY = "hidden";
+                document.getElementById("busAnimate").classList.add("busAnimater");
+                setTimeout(animateBusFunc, 5000);
+
+            }
+
+        }
+
+
+    </script>
+</body>
+
+</html>
